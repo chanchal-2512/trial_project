@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pure Python App</title>
+</head>
+<body>
+
+<h2>Enter Name</h2>
+<input id="nameInput" />
+<button onclick="sendName()">Submit</button>
+
+<p id="response"></p>
+
+<script>
+async function sendName() {
+    const name = document.getElementById("nameInput").value;
+
+    const res = await fetch("/api/name", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ name })
+    });
+
+    const data = await res.json();
+    document.getElementById("response").innerText = data.message;
+}
+</script>
+
+</body>
+</html>
